@@ -149,15 +149,15 @@ export default {
     getHotCourseTeacher() {
       index.getIndexData()
         .then(response => {
-          this.eduList = response.data.data.eduList
-          this.teacherList = response.data.data.teacherList
+          this.eduList = response.data.data.courses
+          this.teacherList = response.data.data.teachers
         })
     },
     //查询banner数据
     getBannerList() {
       banner.getListBanner()
         .then(response => {
-          this.bannerList = response.data.data.list
+          this.bannerList = response.data.data.items
         })
     }
   }
