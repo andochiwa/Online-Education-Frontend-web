@@ -29,7 +29,7 @@
             <i class="iconfont icon-email"/>
           </div>
           <div class="btn" style="position:absolute;right: 0;top: 6px;width: 40%;">
-            <a href="javascript:" type="button" @click="getCodeFun()" :value="codeTest" style="border: none;background-color: none">{{codeTest}}</a>
+            <el-button type="text" @click="getCodeFun" :disabled="sending">{{ codeTest }}</el-button>
           </div>
         </el-form-item>
 
@@ -80,7 +80,7 @@ export default {
         nickName: '',
         password: ''
       },
-      sending: true,      //是否发送验证码
+      sending: false,      //是否没在发送验证码
       second: 60,        //倒计时间
       codeTest: '获取验证码'
     }
@@ -99,8 +99,7 @@ export default {
         this.codeTest = this.second
         if (this.second < 1) {
           clearInterval(result);
-          this.sending = true;
-          //this.disabled = false;
+          this.sending = false;
           this.second = 60;
           this.codeTest = "获取验证码"
         }
@@ -109,8 +108,18 @@ export default {
     // 发送验证码
     getCodeFun() {
       register.sendMailCode(this.params.email)
-        .then(() => {
-          this.sending = false
+        .then(result => {
+          // 判断邮箱是否已存在
+          console.log(result)
+          if (result.data.code === 404) {
+            this.$message({
+              type: 'error',
+              message: '邮箱已存在'
+            })
+            return false
+          }
+
+          this.sending = true
           this.$message({
             type: 'info',
             message: '发送验证码成功'
