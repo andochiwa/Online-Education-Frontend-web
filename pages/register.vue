@@ -9,24 +9,24 @@
     <div class="sign-up-container">
       <el-form ref="userForm" :model="params">
 
-        <el-form-item class="input-prepend restyle" prop="nickname" :rules="[{ required: true, message: '请输入你的昵称', trigger: 'blur' }]">
+        <el-form-item class="input-prepend restyle" prop="nickName" :rules="[{ required: true, message: '请输入你的昵称', trigger: 'blur' }]">
           <div>
-            <el-input type="text" placeholder="你的昵称" v-model="params.nickname"/>
+            <el-input type="text" placeholder="你的昵称" v-model="params.nickName"/>
             <i class="iconfont icon-user"/>
           </div>
         </el-form-item>
 
-        <el-form-item class="input-prepend restyle no-radius" prop="mobile" :rules="[{ required: true, message: '请输入邮箱', trigger: 'blur' },{validator: checkPhone, trigger: 'blur'}]">
+        <el-form-item class="input-prepend restyle no-radius" prop="email" :rules="[{ required: true, message: '请输入邮箱', trigger: 'blur' },{validator: checkEmail, trigger: 'blur'}]">
           <div>
-            <el-input type="text" placeholder="邮箱" v-model="params.mobile"/>
-            <i class="iconfont icon-phone"/>
+            <el-input type="text" placeholder="邮箱" v-model="params.email"/>
+            <i class="iconfont icon-email"/>
           </div>
         </el-form-item>
 
         <el-form-item class="input-prepend restyle no-radius" prop="code" :rules="[{ required: true, message: '请输入验证码', trigger: 'blur' }]">
           <div style="width: 100%;display: block;float: left;position: relative">
             <el-input type="text" placeholder="验证码" v-model="params.code"/>
-            <i class="iconfont icon-phone"/>
+            <i class="iconfont icon-email"/>
           </div>
           <div class="btn" style="position:absolute;right: 0;top: 6px;width: 40%;">
             <a href="javascript:" type="button" @click="getCodeFun()" :value="codeTest" style="border: none;background-color: none">{{codeTest}}</a>
@@ -55,8 +55,8 @@
       <div class="more-sign">
         <h6>社交帐号直接注册</h6>
         <ul>
-          <li><a id="weixin" class="weixin" target="_blank" href="http://huaan.free.idcfengye.com/api/ucenter/wx/login"><i
-            class="iconfont icon-weixin"/></a></li>
+          <li><a id="wechat" class="wechat" target="_blank" href="http://huaan.free.idcfengye.com/api/ucenter/wx/login"><i
+            class="iconfont icon-wechat"/></a></li>
           <li><a id="qq" class="qq" target="_blank" href="#"><i class="iconfont icon-qq"/></a></li>
         </ul>
       </div>
@@ -68,14 +68,16 @@
 import '~/assets/css/sign.css'
 import '~/assets/css/iconfont.css'
 
+import register from "@/api/register";
+
 export default {
   layout: 'sign',
   data() {
     return {
       params: { //封装注册输入数据
-        mobile: '',
+        email: '',
         code: '',  //验证码
-        nickname: '',
+        nickName: '',
         password: ''
       },
       sending: true,      //是否发送验证码
@@ -84,12 +86,60 @@ export default {
     }
   },
   methods: {
-    checkPhone (rule, value, callback) {
-      //debugger
+    checkEmail (rule, value, callback) {
       if (!(/^([a-z0-9_\\.-]+)@([\da-z\\.-]+)\.([a-z\\.]{2,6})$/.test(value))) {
         return callback(new Error('邮箱号码格式不正确'))
       }
       return callback()
+    },
+    // 定时器
+    timeDown() {
+      let result = setInterval(() => {
+        --this.second;
+        this.codeTest = this.second
+        if (this.second < 1) {
+          clearInterval(result);
+          this.sending = true;
+          //this.disabled = false;
+          this.second = 60;
+          this.codeTest = "获取验证码"
+        }
+      }, 1000)
+    },
+    // 发送验证码
+    getCodeFun() {
+      register.sendMailCode(this.params.email)
+        .then(() => {
+          this.sending = false
+          this.$message({
+            type: 'info',
+            message: '发送验证码成功'
+          })
+          this.timeDown()
+        })
+    },
+    // 注册提交
+    submitRegister() {
+      register.register(this.params)
+        .then(result => {
+          // 注册失败
+          if (result.data.code === 404) {
+            this.$message({
+              type: 'success',
+              message: result.data.message
+            })
+            return false
+          }
+          // 注册成功
+          this.$message({
+            type: 'success',
+            message: '注册成功'
+          })
+          // 跳转到登陆页面
+          this.$router.push({
+            path: '/login'
+          })
+        })
     }
   }
 }

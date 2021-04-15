@@ -9,10 +9,10 @@
     <div class="sign-up-container">
       <el-form ref="userForm" :model="user">
 
-        <el-form-item class="input-prepend restyle" prop="mobile" :rules="[{ required: true, message: '请输入手机号码', trigger: 'blur' },{validator: checkPhone, trigger: 'blur'}]">
+        <el-form-item class="input-prepend restyle" prop="mobile" :rules="[{ required: true, message: '请输入手机号码', trigger: 'blur' },{validator: checkEmail, trigger: 'blur'}]">
           <div >
             <el-input type="text" placeholder="手机号" v-model="user.mobile"/>
-            <i class="iconfont icon-phone" />
+            <i class="iconfont icon-email" />
           </div>
         </el-form-item>
 
@@ -31,7 +31,7 @@
       <div class="more-sign">
         <h6>社交帐号登录</h6>
         <ul>
-          <li><a id="weixin" class="weixin" target="_blank" href="http://qy.free.idcfengye.com/api/ucenter/weixinLogin/login"><i class="iconfont icon-weixin"/></a></li>
+          <li><a id="wechat" class="wechat" target="_blank" href="http://qy.free.idcfengye.com/api/ucenter/weixinLogin/login"><i class="iconfont icon-wechat"/></a></li>
           <li><a id="qq" class="qq" target="_blank" href="#"><i class="iconfont icon-qq"/></a></li>
         </ul>
       </div>
@@ -82,10 +82,10 @@ export default {
             })
         })
     },
-    checkPhone (rule, value, callback) {
+    checkEmail (rule, value, callback) {
       //debugger
       if (!(/^1[34578]\d{9}$/.test(value))) {
-        return callback(new Error('手机号码格式不正确'))
+        return callback(new Error('邮箱格式不正确'))
       }
       return callback()
     }

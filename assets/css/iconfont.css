@@ -19,7 +19,7 @@
   content: "\e64d";
 }
 
-.icon-weixin:before {
+.icon-wechat:before {
   content: "\e65d";
 }
 
@@ -27,7 +27,7 @@
   content: "\e63b";
 }
 
-.icon-phone:before {
+.icon-email:before {
   content: "\e600";
 }
 
