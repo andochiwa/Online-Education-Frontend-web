@@ -9,9 +9,9 @@
     <div class="sign-up-container">
       <el-form ref="userForm" :model="user">
 
-        <el-form-item class="input-prepend restyle" prop="mobile" :rules="[{ required: true, message: '请输入手机号码', trigger: 'blur' },{validator: checkEmail, trigger: 'blur'}]">
+        <el-form-item class="input-prepend restyle" prop="email" :rules="[{ required: true, message: '请输入邮箱', trigger: 'blur' },{validator: checkEmail, trigger: 'blur'}]">
           <div >
-            <el-input type="text" placeholder="手机号" v-model="user.mobile"/>
+            <el-input type="text" placeholder="邮箱" v-model="user.email"/>
             <i class="iconfont icon-email" />
           </div>
         </el-form-item>
@@ -24,7 +24,7 @@
         </el-form-item>
 
         <div class="btn">
-          <input type="button" class="sign-in-button" value="登录" @click="submitLogin()">
+          <input type="button" class="sign-in-button" value="登录" @click="LoginUser()">
         </div>
       </el-form>
       <!-- 更多登录方式 -->
@@ -44,15 +44,18 @@
 import '~/assets/css/sign.css'
 import '~/assets/css/iconfont.css'
 
+import login from "@/api/login";
+import cookie from 'js-cookie'
+
 
 export default {
   layout: 'sign',
 
   data () {
     return {
-      //封装登录手机号和密码对象
+      //封装登录邮箱和密码对象
       user:{
-        mobile:'',
+        email:'',
         password:''
       },
       //用户信息
@@ -61,24 +64,26 @@ export default {
   },
 
   methods: {
-    //登录的方法
-    submitLogin() {
-      //第一步 调用接口进行登录，返回token字符串
-      loginApi.submitLoginUser(this.user)
+    //登录
+    LoginUser() {
+      // 调用接口进行登录，返回token字符串
+      login.loginUser(this.user)
         .then(response => {
-          //第二步 获取token字符串放到cookie里面
+          // 获取token字符串放到cookie里面
           //第一个参数cookie名称，第二个参数值，第三个参数作用范围
-          cookie.set('guli_token',response.data.data.token,{domain: 'localhost'})
+          cookie.set('token',response.data.data.token,{domain: 'localhost'})
 
-          //第四步 调用接口 根据token获取用户信息，为了首页面显示
-          loginApi.getLoginUserInfo()
+          // 调用接口 根据token获取用户信息，为了首页面显示
+          login.getLoginUserInfo()
             .then(response => {
-              this.loginInfo = response.data.data.userInfo
+              this.loginInfo = response.data.data.items
               //获取返回用户信息，放到cookie里面
-              cookie.set('guli_ucenter',this.loginInfo,{domain: 'localhost'})
+              cookie.set('user_info',this.loginInfo,{domain: 'localhost'})
 
               //跳转页面
-              window.location.href = "/";
+              this.$router.push({
+                path: '/'
+              })
             })
         })
     },
