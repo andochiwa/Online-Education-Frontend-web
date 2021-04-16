@@ -137,6 +137,7 @@ import "@/assets/css/global.css";
 import "@/assets/css/web.css";
 
 import cookie from 'js-cookie'
+import login from "@/api/login";
 
 export default {
   data() {
@@ -153,6 +154,13 @@ export default {
     }
   },
   created() {
+    // 如果是github登陆，取得token
+    this.token = this.$route.query.token
+
+    if (this.$route.query.token) {
+      this.githubLogin();
+    }
+
     this.showInfo()
   },
   methods: {
@@ -163,6 +171,15 @@ export default {
       if (userInfo) {
         this.loginInfo = JSON.parse(userInfo)
       }
+    },
+    // github登陆取得用户信息
+    githubLogin() {
+      cookie.set('token', this.token, {domain: 'localhost'})
+      login.getLoginUserInfo()
+        .then(result => {
+          //获取返回用户信息，放到cookie里面
+          cookie.set('user_info',result.data.data.items,{domain: 'localhost'})
+        })
     },
     // 退出登录
     logout() {
