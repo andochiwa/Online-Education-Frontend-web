@@ -69,6 +69,14 @@ export default {
       // 调用接口进行登录，返回token字符串
       login.loginUser(this.user)
         .then(response => {
+          // 校验
+          if (response.data.code === 404) {
+            this.$message({
+              type: 'error',
+              message: response.data.message
+            })
+            return false
+          }
           // 获取token字符串放到cookie里面
           //第一个参数cookie名称，第二个参数值，第三个参数作用范围
           cookie.set('token',response.data.data.token,{domain: 'localhost'})
@@ -89,7 +97,7 @@ export default {
     },
     checkEmail (rule, value, callback) {
       //debugger
-      if (!(/^1[34578]\d{9}$/.test(value))) {
+      if (!(/^([a-z0-9_\\.-]+)@([\da-z\\.-]+)\.([a-z\\.]{2,6})$/.test(value))) {
         return callback(new Error('邮箱格式不正确'))
       }
       return callback()
