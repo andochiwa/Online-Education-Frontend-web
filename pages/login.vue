@@ -24,7 +24,7 @@
         </el-form-item>
 
         <div class="btn">
-          <input type="button" class="sign-in-button" value="登录" @click="LoginUser()">
+          <input type="button" class="sign-in-button" value="登录" @click="LoginUser">
         </div>
       </el-form>
       <!-- 更多登录方式 -->

@@ -163,6 +163,13 @@ export default {
       if (userInfo) {
         this.loginInfo = JSON.parse(userInfo)
       }
+    },
+    // 退出登录
+    logout() {
+      // 清空cookie
+      cookie.remove('token')
+      cookie.remove('user_info')
+      this.loginInfo = {}
     }
   }
 };
