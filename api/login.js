@@ -15,5 +15,12 @@ export default {
       url: '/edu-center/user-info',
       method: 'get',
     })
+  },
+  // github登陆
+  githubLogin() {
+    return request({
+      utl: '/login/github',
+      method: 'get'
+    })
   }
 }
