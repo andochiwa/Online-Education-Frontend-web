@@ -103,7 +103,6 @@
                 <a href="#" title="联系我们" target="_blank">联系我们</a>|
                 <a href="#" title="帮助中心" target="_blank">帮助中心</a>|
                 <a href="#" title="资源下载" target="_blank">资源下载</a>|
-                <span>服务热线：010-56253825(北京) 0755-85293825(深圳)</span>
                 <span>Email：a1066079469@gmail.com</span>
               </section>
               <section class="b-f-link mt10">
@@ -179,6 +178,7 @@ export default {
         .then(result => {
           //获取返回用户信息，放到cookie里面
           cookie.set('user_info',result.data.data.items,{domain: 'localhost'})
+          this.loginInfo = result.data.data.items
         })
     },
     // 退出登录
