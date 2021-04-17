@@ -26,12 +26,12 @@
               <li v-for="teacher in teacherInfo" :key="teacher.id">
                 <section class="i-teach-wrap">
                   <div class="i-teach-pic">
-                    <a href="/teacher/1" :title="teacher.name" target="_blank">
+                    <nuxt-link :to="'/teacher/' + teacher.id" :title="teacher.name">
                       <img :src="teacher.avatar" alt>
-                    </a>
+                    </nuxt-link>
                   </div>
                   <div class="mt10 hLh30 txtOf tac">
-                    <a href="/teacher/1" :title="teacher.name" target="_blank" class="fsize18 c-666">{{ teacher.name }}</a>
+                    <nuxt-link :to="'/teacher/' + teacher.id" :title="teacher.name" class="fsize18 c-666">{{ teacher.name }}</nuxt-link>
                   </div>
                   <div class="hLh30 txtOf tac">
                     <span class="fsize14 c-999">{{teacher.intro}}</span>

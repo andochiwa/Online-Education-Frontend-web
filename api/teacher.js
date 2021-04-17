@@ -8,6 +8,13 @@ export default {
       url: `/eduservice/teacher/pageTeacher/${current}/${limit}`,
       method: 'get'
     })
+  },
+  // 根据id获取教师和负责的课程
+  getTeacherCourse(id) {
+    return request({
+      url: `/eduservice/front-teacher/${id}`,
+      method: 'get'
+    })
   }
 
 }
