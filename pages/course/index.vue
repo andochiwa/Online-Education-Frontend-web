@@ -105,7 +105,7 @@
               <li v-for="course in courseInfo">
                 <div class="cc-l-wrap">
                   <section class="course-img">
-                    <img :src="course.cover" class="img-responsive" alt>
+                    <img width="270" height="150" :src="course.cover" alt>
                     <div class="cc-mask">
                       <nuxt-link :to="`/course/` + course.id" title="开始学习" class="comm-btn c-btn-1">开始学习</nuxt-link>
                     </div>

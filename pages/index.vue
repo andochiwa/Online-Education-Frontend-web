@@ -32,9 +32,8 @@
                 <li v-for="course in eduList" :key="course.id">
                   <div class="cc-l-wrap">
                     <section class="course-img">
-                      <img
+                      <img width="270" height="150"
                         :src="course.cover"
-                        class="img-responsive"
                         :alt="course.title"
                       >
                       <div class="cc-mask">
