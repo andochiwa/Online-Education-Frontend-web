@@ -16,12 +16,18 @@
             <dd class="c-s-dl-li">
               <ul class="clearfix">
                 <li>
-                  <a title="全部" @click="courseQuery = {}; getPageCondition(1)" href="#">全部</a>
+                  <a title="全部"
+                     :class="{active: firstIndex === -1}"
+                     @click="firstIndex = -1; secondIndex = -1;
+                     courseQuery = {};
+                     getPageCondition(1)"
+                     href="#">全部</a>
                 </li>
                 <!-- 一级课程 -->
                 <li v-for="(subjectFirst, index) in subject">
                   <a :title="subjectFirst.title"
                      @click="clickFirstSubject(index)"
+                     :class="{active: firstIndex===index}"
                      href="#">
                     {{ subjectFirst.title }}
                   </a>
@@ -36,8 +42,13 @@
             <dd class="c-s-dl-li">
               <ul class="clearfix">
                 <!-- 二级课程 -->
-                <li v-for="subjectSecond in subject[secondSubjectIndex].children">
-                  <a :title="subjectSecond.title" @click="clickSecondSubject(subjectSecond.id)" href="#">{{ subjectSecond.title }}</a>
+                <li v-if="firstIndex !== -1" v-for="(subjectSecond, index) in subject[secondSubjectIndex].children">
+                  <a :title="subjectSecond.title"
+                     :class="{active: secondIndex === index}"
+                     @click="clickSecondSubject(subjectSecond.id, index)"
+                     href="#">
+                    {{ subjectSecond.title }}
+                  </a>
                 </li>
               </ul>
             </dd>
@@ -53,15 +64,30 @@
           </section>
           <section class="fl">
             <ol class="js-tap clearfix">
-              <li>
-                <a title="关注度" href="#">关注度</a>
+              <li :class="{bgOrange: courseQuery.buyCountSort}">
+                <a title="销量"
+                   href="#"
+                   @click="courseQuery.buyCountSort = courseQuery.buyCountSort ? '' : 'active';
+                   getPageCondition()">
+                  销量
+                  <span v-if="courseQuery.buyCountSort">↓</span>
+                </a>
               </li>
-              <li>
-                <a title="最新" href="#">最新</a>
+              <li :class="{bgOrange: courseQuery.gmtCreateSort}">
+                <a title="最新"
+                   href="#"
+                   @click="courseQuery.gmtCreateSort = courseQuery.gmtCreateSort ? '' : 'active';
+                   getPageCondition()">
+                  最新
+                  <span v-if="courseQuery.gmtCreateSort">↓</span>
+                </a>
               </li>
-              <li class="current bg-orange">
-                <a title="价格" href="#">价格&nbsp;
-                  <span>↓</span>
+              <li :class="{bgOrange: courseQuery.priceSort}">
+                <a title="价格"
+                   href="#" @click="courseQuery.priceSort = courseQuery.priceSort ? '' : 'active';
+                   getPageCondition()">
+                  价格
+                  <span v-if="courseQuery.priceSort">↓</span>
                 </a>
               </li>
             </ol>
@@ -153,8 +179,8 @@ export default {
         priceSort: ''
       },
       // 以下是点击时是否点亮用的变量
-      firstSubject: false,
-      secondSubject: false,
+      firstIndex: -1,
+      secondIndex: -1,
       butCount: false,
       gmtCreate: false,
       price: false
@@ -182,16 +208,28 @@ export default {
     },
     // 一级分类查询
     clickFirstSubject(index) {
+      this.firstIndex = index
+      this.secondIndex = -1
       this.secondSubjectIndex = index
       this.courseQuery.subjectParentId = this.subject[index].id
       this.courseQuery.subjectId = ''
       this.getPageCondition()
     },
     // 二级分类查询
-    clickSecondSubject(subjectId) {
+    clickSecondSubject(subjectId, index) {
+      this.secondIndex = index
       this.courseQuery.subjectId = subjectId
       this.getPageCondition()
     }
   }
 };
 </script>
+
+<style scoped>
+.active {
+  background: #d0c1c1;
+}
+.bgOrange {
+  background-color: #68cb9b;
+}
+</style>

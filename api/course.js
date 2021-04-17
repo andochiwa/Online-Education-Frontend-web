@@ -15,5 +15,12 @@ export default {
       url: `/eduservice/subject`,
       method: 'get'
     })
+  },
+  // 查询课程以及相关联的教师，分类的详细信息
+  getAllCourseInfo(courseId) {
+    return request({
+      url: `/eduservice/front-course/${courseId}`,
+      method: 'get'
+    })
   }
 }
