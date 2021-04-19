@@ -21,5 +21,12 @@ export default {
       url: `/order/pay-log/${orderId}`,
       method: 'put'
     })
+  },
+  // 根据课程id和用户id查询
+  isBuyCourse(courseId) {
+    return request({
+      url: `/order/order/course-status/${courseId}`,
+      method: 'get'
+    })
   }
 }

@@ -34,7 +34,8 @@
               </span>
             </section>
             <section class="c-attr-mt">
-              <a @click="createOrder()" href="#" title="立即购买" class="comm-btn c-btn-3">立即购买</a>
+              <a v-if="buyCourse()" @click="createOrder()" href="#" title="立即观看" class="comm-btn c-btn-3">立即观看</a>
+              <a v-else @click="createOrder()" href="#" title="立即购买" class="comm-btn c-btn-3">立即购买</a>
             </section>
           </section>
         </aside>
@@ -162,6 +163,7 @@
 <script>
 import course from "@/api/course";
 import order from "@/api/order";
+import cookie from "js-cookie"
 
 export default {
   asyncData({params, error}) {
@@ -173,9 +175,28 @@ export default {
         }
       })
   },
+  data() {
+    return {
+      isBuyCourse: ''
+    }
+  },
+  created() {
+    // 查询课程购买状态
+    order.isBuyCourse(this.courseWebInfo.id)
+      .then(result => {
+        this.isBuyCourse = result.data.code === 200
+      })
+  },
   methods: {
     // 生成订单
     createOrder() {
+      if (!cookie.get('token')) {
+        this.$message({
+          type: 'error',
+          message: '请先登录'
+        })
+        return false
+      }
       order.createOrder(this.courseWebInfo.id)
         .then(result => {
           // 跳转到订单显示页面
@@ -183,6 +204,13 @@ export default {
             path: `/order/${result.data.data.orderId}`
           })
         })
+    },
+    // 判断是否已购买课程
+    buyCourse() {
+      if (this.courseWebInfo.price === 0) {
+        return true
+      }
+      return this.isBuyCourse
     }
   }
 };
