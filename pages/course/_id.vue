@@ -12,7 +12,7 @@
       <div>
         <article class="c-v-pic-wrap" style="height: 357px;">
           <section class="p-h-video-box" id="videoPlay">
-            <img :src="courseWebInfo.cover" alt width="700" height="355" class="dis  c-v-pic">
+            <img :src="courseWebInfo.cover" alt width="640" height="358" class="dis  c-v-pic">
           </section>
         </article>
         <aside class="c-attr-wrap">
@@ -34,7 +34,7 @@
               </span>
             </section>
             <section class="c-attr-mt">
-              <a href="#" title="立即观看" class="comm-btn c-btn-3">立即观看</a>
+              <a @click="createOrder()" href="#" title="立即购买" class="comm-btn c-btn-3">立即购买</a>
             </section>
           </section>
         </aside>
@@ -161,6 +161,7 @@
 
 <script>
 import course from "@/api/course";
+import order from "@/api/order";
 
 export default {
   asyncData({params, error}) {
@@ -171,6 +172,18 @@ export default {
           chapterVideo: result.data.data.chapters
         }
       })
+  },
+  methods: {
+    // 生成订单
+    createOrder() {
+      order.createOrder(this.courseWebInfo.id)
+        .then(result => {
+          // 跳转到订单显示页面
+          this.$router.push({
+            path: `/order/${result.data.data.orderId}`
+          })
+        })
+    }
   }
 };
 </script>
