@@ -14,5 +14,12 @@ export default {
       url: `/order/order/${orderId}`,
       method: 'get'
     })
+  },
+  // 更新订单状态
+  updateOrder(orderId) {
+    return request({
+      url: `/order/pay-log/${orderId}`,
+      method: 'put'
+    })
   }
 }

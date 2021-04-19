@@ -49,7 +49,7 @@
       <div class="Finish">
         <div class="fr" id="AgreeDiv">
 
-          <label for="Agree"><p class="on"><input type="checkbox" checked="checked">我已阅读并同意<a href="javascript:" target="_blank">《谷粒学院购买协议》</a></p></label>
+          <label for="Agree"><p class="on"><input type="checkbox" checked="checked">我已阅读并同意<a href="javascript:" target="_blank">《在线教育购买协议》</a></p></label>
         </div>
         <div class="clear"></div>
         <div class="Main fl">
@@ -62,7 +62,7 @@
           </div>
         </div>
         <input name="score" value="0" type="hidden" id="usedScore">
-        <button class="fr redb" type="button" id="submitPay" @click="toPay()">去支付</button>
+        <button class="fr redb" type="button" id="submitPay" @click="updateOrder()">去支付</button>
         <div class="clear"></div>
       </div>
     </form>
@@ -89,6 +89,19 @@ export default {
       order.getOrder(this.orderId)
         .then(result => {
           this.orderInfo = result.data.data.items
+        })
+    },
+    // 更新订单状态
+    updateOrder() {
+      order.updateOrder(this.orderId)
+        .then(() => {
+          this.$message({
+            type: 'success',
+            message: '支付成功'
+          })
+          this.$router.push({
+            path: `/course/${this.orderInfo.courseId}`
+          })
         })
     }
   }
