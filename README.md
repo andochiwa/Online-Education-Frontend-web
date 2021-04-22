@@ -1,6 +1,10 @@
-# education-frontend-web
+# Link
 
-## Build Setup
+[Back-end](https://github.com/andochiwa/Online-Education-Backend)
+
+[Front-end-admin](https://github.com/andochiwa/Online-Education-Frontend-web)
+
+# Build Setup
 
 ```bash
 # install dependencies
@@ -16,5 +20,3 @@ $ npm run start
 # generate static project
 $ npm run generate
 ```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).

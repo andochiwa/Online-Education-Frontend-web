@@ -184,6 +184,7 @@ export default {
       login.getLoginUserInfo()
         .then(result => {
           //获取返回用户信息，放到cookie里面
+          console.log(result)
           cookie.set('user_info',result.data.data.items,{domain: 'localhost'})
           this.loginInfo = result.data.data.items
         })
