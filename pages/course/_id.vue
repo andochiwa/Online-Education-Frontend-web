@@ -40,13 +40,13 @@
           </section>
         </aside>
         <aside class="thr-attr-box">
-          <ol class="thr-attr-ol clearfix">
+          <ol class="thr-attr-ol">
             <li>
               <p>&nbsp;</p>
               <aside>
                 <span class="c-fff f-fM">购买数</span>
                 <br>
-                <h6 class="c-fff f-fM mt10">{{courseWebInfo.butCount}}</h6>
+                <h6 class="c-fff f-fM mt10">{{courseWebInfo.buyCount}}</h6>
               </aside>
             </li>
             <li>
