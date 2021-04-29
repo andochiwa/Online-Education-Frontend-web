@@ -180,11 +180,10 @@ export default {
     },
     // github登陆取得用户信息
     githubLogin() {
-      cookie.set('token', this.token, {domain: 'localhost'})
+      cookie.set('web-token', this.token, {domain: 'localhost'})
       login.getLoginUserInfo()
         .then(result => {
           //获取返回用户信息，放到cookie里面
-          console.log(result)
           cookie.set('user_info',result.data.data.items,{domain: 'localhost'})
           this.loginInfo = result.data.data.items
         })
@@ -192,7 +191,7 @@ export default {
     // 退出登录
     logout() {
       // 清空cookie
-      cookie.remove('token')
+      cookie.remove('web-token')
       cookie.remove('user_info')
       this.loginInfo = {}
     }
