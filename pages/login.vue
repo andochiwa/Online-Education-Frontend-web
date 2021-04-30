@@ -80,14 +80,14 @@ export default {
           }
           // 获取token字符串放到cookie里面
           //第一个参数cookie名称，第二个参数值，第三个参数作用范围
-          cookie.set('web-token',response.data.data.token,{domain: 'localhost'})
+          cookie.set('web-token',response.data.data.token)
 
           // 调用接口 根据token获取用户信息，为了首页面显示
           login.getLoginUserInfo()
             .then(response => {
               this.loginInfo = response.data.data.items
               //获取返回用户信息，放到cookie里面
-              cookie.set('user_info',this.loginInfo,{domain: 'localhost'})
+              cookie.set('user_info',this.loginInfo)
 
               //跳转页面
               this.$router.push({

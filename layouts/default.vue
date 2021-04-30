@@ -38,7 +38,7 @@
               <q class="red-point" style="display: none">&nbsp;</q>
             </li>
             <li v-if="loginInfo.id" id="is-login-two" class="h-r-user">
-              <a href="/ucenter" title>
+              <a @click="dialogUserVisible = true" title>
                 <img
                   :src="loginInfo.avatar"
                   width="30"
@@ -71,6 +71,37 @@
       </section>
     </header>
     <!-- /公共头引入 -->
+
+    <!--  用户信息修改框开始  -->
+    <el-dialog :before-close="beforeClose" title="收货地址" :visible.sync="dialogUserVisible">
+      <el-form :model="loginInfo">
+        <el-form-item label="昵称" label-width="120px">
+          <el-input v-model="loginInfo.nickname" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="email" label-width="120px">
+          <el-input :disabled="true" v-model="loginInfo.email" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="password" label-width="120px">
+          <el-input type="password" :disabled="loginInfo.email === ''" v-model="loginInfo.password" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="上传头像" label-width="120px">
+          <el-upload
+            class="avatar-uploader"
+            action="http://localhost/edu-oss/file"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess"
+            accept="image/*"
+          >
+            <img v-if="avatar" :src="avatar" class="avatar" alt="">
+            <img v-else :src="loginInfo.avatar" class="avatar" alt="">
+          </el-upload>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="saveUserInfo">确 定</el-button>
+      </div>
+    </el-dialog>
+    <!--  用户信息修改框结束  -->
 
     <nuxt/>
 
@@ -136,9 +167,11 @@ export default {
         age: '',
         avatar: '',
         email: '',
-        nickName: '',
+        nickname: '',
         sex: ''
-      }
+      },
+      avatar: '',
+      dialogUserVisible: false
     }
   },
   created() {
@@ -162,11 +195,11 @@ export default {
     },
     // github登陆取得用户信息
     githubLogin() {
-      cookie.set('web-token', this.token, {domain: 'localhost'})
+      cookie.set('web-token', this.token)
       login.getLoginUserInfo()
         .then(result => {
           //获取返回用户信息，放到cookie里面
-          cookie.set('user_info', result.data.data.items, {domain: 'localhost'})
+          cookie.set('user_info', result.data.data.items)
           this.loginInfo = result.data.data.items
         })
     },
@@ -176,6 +209,32 @@ export default {
       cookie.remove('web-token')
       cookie.remove('user_info')
       this.loginInfo = {}
+    },
+    // 上传头像成功后
+    handleAvatarSuccess(res) {
+      this.avatar = res.data.url
+      console.log(this.avatar)
+    },
+    // 用户修改框关闭前
+    beforeClose() {
+      console.log(this.loginInfo)
+      this.dialogUserVisible = false
+      this.showInfo()
+    },
+    saveUserInfo() {
+      this.loginInfo.avatar = this.avatar
+      this.loginInfo.gmtCreate = ''
+      this.loginInfo.gmtModified = ''
+      login.updateUser(this.loginInfo)
+        .then(() => {
+          this.$message({
+            type: 'success',
+            message: '修改成功'
+          })
+          this.dialogUserVisible = false
+          cookie.set('user_info', this.loginInfo)
+          this.showInfo()
+        })
     }
   }
 };

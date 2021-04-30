@@ -22,5 +22,13 @@ export default {
       utl: '/login/github',
       method: 'get'
     })
+  },
+  // 保存用户信息
+  updateUser(userInfo) {
+    return request({
+      url: `/edu-center`,
+      method: 'put',
+      data: userInfo
+    })
   }
 }
