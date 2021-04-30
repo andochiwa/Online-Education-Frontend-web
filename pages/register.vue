@@ -1,9 +1,9 @@
 <template>
   <div class="main">
     <div class="title">
-      <a href="/login">登录</a>
+      <nuxt-link to="/login">登录</nuxt-link>
       <span>·</span>
-      <a class="active" href="/register">注册</a>
+      <nuxt-link to="/register" class="active">注册</nuxt-link>
     </div>
 
     <div class="sign-up-container">
@@ -51,15 +51,6 @@
           <a target="_blank" href="http://www.jianshu.com/p/2ov8x3">隐私政策</a> 。
         </p>
       </el-form>
-      <!-- 更多注册方式 -->
-      <div class="more-sign">
-        <h6>社交帐号直接注册</h6>
-        <ul>
-          <li><a id="wechat" class="wechat" target="_blank" href="http://huaan.free.idcfengye.com/api/ucenter/wx/login"><i
-            class="iconfont icon-wechat"/></a></li>
-          <li><a id="qq" class="qq" target="_blank" href="#"><i class="iconfont icon-qq"/></a></li>
-        </ul>
-      </div>
     </div>
   </div>
 </template>

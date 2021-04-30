@@ -144,9 +144,9 @@ a.current-2 .lh-p-icon{background-position:0 -254px}
 #logo{float:left;width:220px;height:72px;overflow:hidden;margin:0 auto}
 #logo a{display:table-cell;vertical-align:middle;height:72px}
 #logo a img{display:block;max-width:100%;height:auto;vertical-align:middle}
-.nav{padding:15px 0 0 50px}
+.nav{padding:15px 0 0 150px}
 .nav,.nav li,.nav li a{float:left}
-.nav li a{border-bottom:2px solid transparent;color:#666;display:block;font-size:20px;line-height:50px;padding:0 10px;margin:0 10px;transition:.3s;-webkit-transition:.3s}
+.nav li a{border-bottom:2px solid transparent;color:#666;display:block;font-size:25px;line-height:50px;padding:0 30px;margin:0 10px;transition:.3s;-webkit-transition:.3s}
 .h-r-login li a:hover,.nav li a:hover,.nav li.current a{text-decoration:none}
 .h-r-login,.h-r-search{float:right;padding-top:15px}
 .h-r-login li{float:left;margin-left:10px;position:relative}

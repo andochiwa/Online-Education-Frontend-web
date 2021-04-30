@@ -23,11 +23,11 @@
         </tr>
         <tr class="good">
           <td class="name First">
-            <a :href="'https://localhost:3000/course/'+orderInfo.courseId">
-              <img :src="orderInfo.courseCover" alt></a>
+            <nuxt-link :to="`/course/${orderInfo.courseId}`">
+              <img :src="orderInfo.courseCover" alt></nuxt-link>
             <div class="goodInfo">
               <input type="hidden" class="ids ids_14502" value="14502">
-              <a :href="'https://localhost:3000/course/'+ orderInfo.courseId">{{orderInfo.courseTitle}}</a>
+              <nuxt-link :to="`/course/${orderInfo.courseId}`">{{orderInfo.courseTitle}}</nuxt-link>
             </div>
           </td>
           <td class="price">
@@ -54,7 +54,7 @@
         <div class="clear"></div>
         <div class="Main fl">
           <div class="fl">
-            <a :href="'/course/'+orderInfo.courseId">返回课程详情页</a>
+            <nuxt-link :to="`/course/${orderInfo.courseId}`">返回课程详情页</nuxt-link>
           </div>
           <div class="fr">
             <p>共 <strong class="red">1</strong> 件商品，合计<span class="red f20">￥<strong

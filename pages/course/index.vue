@@ -122,7 +122,7 @@
                       </i>
                     </span>
                     <span class="fl jgAttr c-ccc f-fA">
-                      <i class="c-999 f-fA">9634人学习</i>
+                      <i class="c-999 f-fA">{{course.viewCount}}人学习</i>
                       |
                       <i class="c-999 f-fA">9634评论</i>
                     </span>

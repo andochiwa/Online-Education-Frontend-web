@@ -5,9 +5,9 @@
     <div class="block">
       <el-carousel :interval="4000" type="card" height="450px">
         <el-carousel-item v-for="banner in bannerList" :key="banner.id" style="background: #040B1B;">
-          <a target="_blank" :href="banner.linkUrl">
+          <nuxt-link :to="banner.linkUrl">
             <img width="100%" height="100%" :src="banner.imageUrl" :alt="banner.title">
-          </a>
+          </nuxt-link>
         </el-carousel-item>
       </el-carousel>
     </div>
@@ -33,11 +33,11 @@
                         :alt="course.title"
                       >
                       <div class="cc-mask">
-                        <a href="#" title="开始学习" class="comm-btn c-btn-1">开始学习</a>
+                        <nuxt-link :to="`/course/${course.id}`" title="开始学习" class="comm-btn c-btn-1">开始学习</nuxt-link>
                       </div>
                     </section>
                     <h3 class="hLh30 txtOf mt10">
-                      <a href="#" :title="course.title" class="course-title fsize18 c-333">{{course.title}}</a>
+                      <nuxt-link :to="`/course/${course.id}`" :title="course.title" class="course-title fsize18 c-333">{{course.title}}</nuxt-link>
                     </h3>
                     <section class="mt10 hLh20 of">
                       <span class="fr jgTag bg-green" v-if="Number(course.price) === 0">
@@ -56,7 +56,7 @@
               <div class="clear"></div>
             </article>
             <section class="tac pt20">
-              <a href="#" title="全部课程" class="comm-btn c-btn-2">全部课程</a>
+              <nuxt-link to="/course" title="全部课程" class="comm-btn c-btn-2">全部课程</nuxt-link>
             </section>
           </div>
         </section>
@@ -76,12 +76,12 @@
                 <li v-for="teacher in teacherList" :key="teacher.id">
                   <section class="i-teach-wrap">
                     <div class="i-teach-pic">
-                      <a href="/teacher/1" :title="teacher.name">
+                      <nuxt-link :to="`/teacher/${teacher.id}`" :title="teacher.name">
                         <img :alt="teacher.name" :src="teacher.avatar">
-                      </a>
+                      </nuxt-link>
                     </div>
                     <div class="mt10 hLh30 txtOf tac">
-                      <a href="/teacher/1" :title="teacher.name" class="fsize18 c-666">{{teacher.name}}</a>
+                      <nuxt-link :to="`/teacher/${teacher.id}`" :title="teacher.name" class="fsize18 c-666">{{teacher.name}}</nuxt-link>
                     </div>
                     <div class="hLh30 txtOf tac">
                       <span class="fsize14 c-999">{{teacher.career}}</span>
@@ -98,7 +98,7 @@
               <div class="clear"></div>
             </article>
             <section class="tac pt20">
-              <a href="#" title="全部讲师" class="comm-btn c-btn-2">全部讲师</a>
+              <nuxt-link to="/teacher" title="全部讲师" class="comm-btn c-btn-2">全部讲师</nuxt-link>
             </section>
           </div>
         </section>

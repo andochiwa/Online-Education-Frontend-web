@@ -3,7 +3,7 @@
     <!-- /课程详情 开始 -->
     <section class="container">
       <section class="path-wrap txtOf hLh30">
-        <a href="#" title class="c-999 fsize14">首页</a>
+        <nuxt-link to="/" title class="c-999 fsize14">首页</nuxt-link>
         \
         <a href="#" title class="c-999 fsize14">{{courseWebInfo.subjectParentTitle}}</a>
         \
@@ -30,7 +30,7 @@
             <section class="c-attr-mt of">
               <span class="ml10 vam">
                 <em class="icon18 scIcon"></em>
-                <a class="c-fff vam" title="收藏" href="#" >收藏</a>
+                <nuxt-link class="c-fff vam" title="如未登录请先登录" to="/login" >如未登录请先登录</nuxt-link>
               </span>
             </section>
             <section class="c-attr-mt">
@@ -131,18 +131,18 @@
           <div class="i-box">
             <div>
               <section class="c-infor-tabTitle c-tab-title">
-                <a title href="javascript:void(0)">主讲讲师</a>
+                <nuxt-link :to="`/teacher/${courseWebInfo.teacherId}`" title>主讲讲师</nuxt-link>
               </section>
               <section class="stud-act-list">
                 <ul style="height: auto;">
                   <li>
                     <div class="u-face">
-                      <a href="#">
+                      <nuxt-link :to="`/teacher/${courseWebInfo.teacherId}`">
                         <img :src="courseWebInfo.avatar" width="50" height="50" alt>
-                      </a>
+                      </nuxt-link>
                     </div>
                     <section class="hLh30 txtOf">
-                      <a class="c-333 fsize16 fl" href="#">{{courseWebInfo.teacherName}}</a>
+                      <nuxt-link :to="`/teacher/${courseWebInfo.teacherId}`" class="c-333 fsize16 fl" >{{courseWebInfo.teacherName}}</nuxt-link>
                     </section>
                     <section class="hLh20 txtOf">
                       <span class="c-999">{{courseWebInfo.intro}}</span>
@@ -190,7 +190,7 @@ export default {
   methods: {
     // 生成订单
     createOrder() {
-      if (!cookie.get('token')) {
+      if (!cookie.get('web-token')) {
         this.$message({
           type: 'error',
           message: '请先登录'
