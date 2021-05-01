@@ -1,8 +1,8 @@
 <template>
   <div class="sign">
-    <div class="logo">
+    <nuxt-link to="/" class="logo">
       <img src="@/assets/img/logo.png" alt="logo"/>
-    </div>
+    </nuxt-link>
     <nuxt/>
   </div>
 </template>

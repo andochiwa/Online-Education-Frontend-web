@@ -1,11 +1,14 @@
 <template>
   <div class="online-player">
     <div class="head">
-      <a href="#" title="在线教育">
+      <nuxt-link to="/" title="在线教育">
         <img class="logo" src="@/assets/img/logo.png" alt="在线教育">
-    </a></div>
+      </nuxt-link>
+    </div>
     <div class="body">
-      <div class="content"><nuxt/></div>
+      <div class="content">
+        <nuxt/>
+      </div>
     </div>
   </div>
 </template>
@@ -14,8 +17,8 @@ export default {}
 </script>
 
 <style>
-html,body{
-  height:100%;
+html, body {
+  height: 100%;
 }
 </style>
 
@@ -28,7 +31,7 @@ html,body{
   width: 100%;
 }
 
-.head .logo{
+.head .logo {
   height: 50px;
   margin-left: 10px;
 }

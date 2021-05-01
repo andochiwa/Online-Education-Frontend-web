@@ -12,6 +12,7 @@
     "axios": "^0.21.1",
     "core-js": "^3.9.1",
     "element-ui": "^2.15.1",
+    "hbl-comment": "^1.2.3",
     "js-cookie": "^2.2.1",
     "nuxt": "^2.15.3",
     "swiper": "^6.5.6",

@@ -134,7 +134,7 @@
                 <nuxt-link :to="`/teacher/${courseWebInfo.teacherId}`" title>主讲讲师</nuxt-link>
               </section>
               <section class="stud-act-list">
-                <ul style="height: auto;">
+                <ul style="height: 150px;">
                   <li>
                     <div class="u-face">
                       <nuxt-link :to="`/teacher/${courseWebInfo.teacherId}`">
@@ -157,6 +157,7 @@
       </div>
     </section>
     <!-- /课程详情 结束 -->
+    <comment :courseId="this.courseWebInfo.id"/>
   </div>
 </template>
 
@@ -164,8 +165,12 @@
 import course from "@/api/course";
 import order from "@/api/order";
 import cookie from "js-cookie"
+import comment from "@/components/comment";
 
 export default {
+  components: {
+    comment
+  },
   asyncData({params, error}) {
     return course.getAllCourseInfo(params.id)
       .then(result => {
