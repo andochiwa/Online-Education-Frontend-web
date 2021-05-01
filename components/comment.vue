@@ -26,7 +26,7 @@ export default {
       placeholder: "说点什么吧",
       minRows: 4,
       maxRows: 4,
-      commentNum: 2,
+      commentNum: 0,
       commentList: []
     }
   },
@@ -48,6 +48,7 @@ export default {
         .then(result => {
           let val = result.data.data.items
           this.commentList = []
+          this.commentNum = val.length
           for (let i = 0; i < val.length; i++) {
             this.commentList.push({
               commentUser: {
@@ -60,7 +61,6 @@ export default {
               childrenList: []
             })
             for (let j = 0; j < val[i].children.length; j++) {
-              console.log(val[i].children)
               this.commentList[i].childrenList.push({
                 commentUser: {
                   id: val[i].children[j].id,
@@ -75,14 +75,37 @@ export default {
           }
         })
     },
+    // 添加评论
+    saveComment(course) {
+      comment.saveComment(this.courseId, course)
+        .then(() => {
+          this.$message({
+            type: 'success',
+            message: '评论成功'
+          })
+          this.getComment()
+        })
+    },
     doSend(content) {
-      console.log("初始发送按钮点击事件：" + content);
+      let course = {
+        courseId: this.courseId,
+        memberId: this.userInfo.id,
+        nickname: this.userInfo.nickname,
+        avatar: this.userInfo.avatar,
+        content: content
+      }
+      this.saveComment(course)
     },
     doChidSend(args) {
-      console.log("评论区发送按钮点击事件：");
-      console.log("content=" + args[0]);
-      console.log("targetUserId=" + args[1]);
-      console.log("父级评论id=" + args[2]);
+      let course = {
+        courseId: this.courseId,
+        memberId: this.userInfo.id,
+        nickname: this.userInfo.nickname,
+        avatar: this.userInfo.avatar,
+        content: args[0],
+        parentId: args[1]
+      }
+      this.saveComment(course)
     }
   }
 }

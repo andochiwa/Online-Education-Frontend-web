@@ -30,7 +30,7 @@
             <section class="c-attr-mt of">
               <span class="ml10 vam">
                 <em class="icon18 scIcon"></em>
-                <nuxt-link class="c-fff vam" title="如未登录请先登录" to="/login" >如未登录请先登录</nuxt-link>
+                如未登录请先登录
               </span>
             </section>
             <section class="c-attr-mt">
