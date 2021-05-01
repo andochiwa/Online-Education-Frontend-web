@@ -34,7 +34,7 @@
               </span>
             </section>
             <section class="c-attr-mt">
-              <a v-if="buyCourse()" @click="createOrder()" href="#" title="立即观看" class="comm-btn c-btn-3">立即观看</a>
+              <a v-if="buyCourse()" href="#" title="立即观看" class="comm-btn c-btn-3">立即观看</a>
               <a v-else @click="createOrder()" href="#" title="立即购买" class="comm-btn c-btn-3">立即购买</a>
             </section>
           </section>

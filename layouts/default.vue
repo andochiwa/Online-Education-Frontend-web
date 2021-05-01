@@ -54,14 +54,14 @@
           </ul>
 
           <aside class="h-r-search">
-            <form action="#" method="post">
               <label class="h-r-s-box">
-                <input type="text" placeholder="输入你想学的课程" name="queryCourse.courseName" value>
-                <button type="submit" class="s-btn">
-                  <em class="icon18">&nbsp;</em>
-                </button>
+                <input type="text" placeholder="输入你想学的课程" v-model="courseName" value>
+                <nuxt-link :to="{path: '/course', query: {courseName: courseName}}">
+                  <button type="submit" class="s-btn">
+                    <em class="icon18">&nbsp;</em>
+                  </button>
+                </nuxt-link>
               </label>
-            </form>
           </aside>
         </div>
         <aside class="mw-nav-btn">
@@ -93,7 +93,8 @@
             accept="image/*"
           >
             <img v-if="avatar" :src="avatar" class="avatar" alt="">
-            <img v-else :src="loginInfo.avatar" class="avatar" alt="">
+            <img v-else-if="loginInfo.avatar" :src="loginInfo.avatar" class="avatar" alt="">
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form-item>
       </el-form>
@@ -171,7 +172,8 @@ export default {
         sex: ''
       },
       avatar: '',
-      dialogUserVisible: false
+      dialogUserVisible: false,
+      courseName: ''
     }
   },
   created() {
@@ -222,7 +224,9 @@ export default {
       this.showInfo()
     },
     saveUserInfo() {
-      this.loginInfo.avatar = this.avatar
+      if (this.avatar) {
+        this.loginInfo.avatar = this.avatar
+      }
       this.loginInfo.gmtCreate = ''
       this.loginInfo.gmtModified = ''
       login.updateUser(this.loginInfo)

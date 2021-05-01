@@ -176,7 +176,8 @@ export default {
         subjectParentId: '',
         buyCountSort: '',
         gmtCreateSort: '',
-        priceSort: ''
+        priceSort: '',
+        courseName: ''
       },
       // 以下是点击时是否点亮用的变量
       firstIndex: -1,
@@ -187,6 +188,8 @@ export default {
     }
   },
   created() {
+    this.courseQuery.courseName = this.$route.query.courseName
+    console.log(this.courseQuery)
     this.getPageCondition()
     this.getSubject()
   },
