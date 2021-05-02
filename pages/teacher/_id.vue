@@ -12,7 +12,7 @@
         <section class="fl t-infor-box c-desc-content">
           <div class="mt20 ml20">
             <section class="t-infor-pic">
-              <img :src="teacherInfo.avatar" alt>
+              <img style="width: 650px" height="700" :src="teacherInfo.avatar" alt>
         </section>
             <h3 class="hLh30">
               <span class="fsize24 c-333">

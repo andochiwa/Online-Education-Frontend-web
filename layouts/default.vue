@@ -4,9 +4,9 @@
     <header id="header">
       <section class="container">
         <h1 id="logo">
-          <a href="#" title="在线教育">
+          <nuxt-link to="/" title="在线教育">
             <img src="@/assets/img/logo.png" width="100%" alt="在线教育">
-          </a>
+          </nuxt-link>
         </h1>
         <div class="h-r-nsl">
           <ul class="nav">

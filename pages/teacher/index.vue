@@ -24,7 +24,7 @@
                 <section class="i-teach-wrap">
                   <div class="i-teach-pic">
                     <nuxt-link :to="'/teacher/' + teacher.id" :title="teacher.name">
-                      <img :src="teacher.avatar" alt>
+                      <img width="270" height="150" :src="teacher.avatar" alt>
                     </nuxt-link>
                   </div>
                   <div class="mt10 hLh30 txtOf tac">

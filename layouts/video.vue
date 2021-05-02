@@ -1,10 +1,10 @@
 <template>
   <div class="online-player">
-    <div class="head">
+    <h1 id="logo">
       <nuxt-link to="/" title="在线教育">
-        <img class="logo" src="@/assets/img/logo.png" alt="在线教育">
+        <img src="@/assets/img/logo.png" width="100%" alt="在线教育">
       </nuxt-link>
-    </div>
+    </h1>
     <div class="body">
       <div class="content">
         <nuxt/>

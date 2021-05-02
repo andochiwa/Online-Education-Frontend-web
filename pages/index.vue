@@ -77,7 +77,7 @@
                   <section class="i-teach-wrap">
                     <div class="i-teach-pic">
                       <nuxt-link :to="`/teacher/${teacher.id}`" :title="teacher.name">
-                        <img :alt="teacher.name" :src="teacher.avatar">
+                        <img width="270" height="150" :alt="teacher.name" :src="teacher.avatar">
                       </nuxt-link>
                     </div>
                     <div class="mt10 hLh30 txtOf tac">
