@@ -1,17 +1,20 @@
 export default {
-  // Global page headers: https://go.nuxtjs.dev/config-head
+  server: {
+    port: 3000, // default: 3000
+    host: '0.0.0.0', // default: localhost
+  },
   head: {
     title: '在线教育平台',
     // htmlAttrs: {
     //   lang: 'en'
     // },
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      {charset: 'utf-8'},
+      {name: 'viewport', content: 'width=device-width, initial-scale=1'},
+      {hid: 'description', name: 'description', content: ''}
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
     ]
   },
 
@@ -34,12 +37,10 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-  ],
+  buildModules: [],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-  ],
+  modules: [],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

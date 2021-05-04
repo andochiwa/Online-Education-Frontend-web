@@ -124,7 +124,7 @@
                     <span class="fl jgAttr c-ccc f-fA">
                       <i class="c-999 f-fA">{{course.viewCount}}人学习</i>
                       |
-                      <i class="c-999 f-fA">9634评论</i>
+                      <i class="c-999 f-fA">{{course.buyCount}}人购买</i>
                     </span>
                   </section>
                 </div>
@@ -189,7 +189,6 @@ export default {
   },
   created() {
     this.courseQuery.courseName = this.$route.query.courseName
-    console.log(this.courseQuery)
     this.getPageCondition()
     this.getSubject()
   },

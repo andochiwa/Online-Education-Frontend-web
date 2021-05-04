@@ -29,24 +29,26 @@
                   <div class="cc-l-wrap">
                     <section class="course-img">
                       <img width="270" height="150"
-                        :src="course.cover"
-                        :alt="course.title"
+                           :src="course.cover"
+                           :alt="course.title"
                       >
                       <div class="cc-mask">
                         <nuxt-link :to="`/course/${course.id}`" title="开始学习" class="comm-btn c-btn-1">开始学习</nuxt-link>
                       </div>
                     </section>
                     <h3 class="hLh30 txtOf mt10">
-                      <nuxt-link :to="`/course/${course.id}`" :title="course.title" class="course-title fsize18 c-333">{{course.title}}</nuxt-link>
+                      <nuxt-link :to="`/course/${course.id}`" :title="course.title" class="course-title fsize18 c-333">
+                        {{ course.title }}
+                      </nuxt-link>
                     </h3>
                     <section class="mt10 hLh20 of">
                       <span class="fr jgTag bg-green" v-if="Number(course.price) === 0">
                         <i class="c-fff fsize12 f-fA">免费</i>
                       </span>
                       <span class="fl jgAttr c-ccc f-fA">
-                        <i class="c-999 f-fA">9634人学习</i>
+                        <i class="c-999 f-fA">{{course.viewCount}}人学习</i>
                         |
-                        <i class="c-999 f-fA">9634评论</i>
+                        <i class="c-999 f-fA">{{course.buyCount}}人购买</i>
                       </span>
                     </section>
                   </div>
@@ -67,7 +69,7 @@
         <section class="container">
           <header class="comm-title">
             <h2 class="tac">
-              <span class="c-333">名师大咖</span>
+              <span class="c-333">热门名师</span>
             </h2>
           </header>
           <div>
@@ -81,15 +83,17 @@
                       </nuxt-link>
                     </div>
                     <div class="mt10 hLh30 txtOf tac">
-                      <nuxt-link :to="`/teacher/${teacher.id}`" :title="teacher.name" class="fsize18 c-666">{{teacher.name}}</nuxt-link>
+                      <nuxt-link :to="`/teacher/${teacher.id}`" :title="teacher.name" class="fsize18 c-666">
+                        {{ teacher.name }}
+                      </nuxt-link>
                     </div>
                     <div class="hLh30 txtOf tac">
-                      <span class="fsize14 c-999">{{teacher.career}}</span>
+                      <span class="fsize14 c-999">{{ teacher.career }}</span>
                     </div>
                     <div class="mt15 i-q-txt">
                       <p
                         class="c-999 f-fA"
-                      >{{teacher.intro}}</p>
+                      >{{ teacher.intro }}</p>
                     </div>
                   </section>
                 </li>
@@ -113,9 +117,8 @@ import banner from '@/api/banner'
 import index from '@/api/index'
 
 export default {
-  data () {
+  data() {
     return {
-
       swiperOption: {
         //配置分页
         pagination: {
@@ -128,9 +131,9 @@ export default {
         }
       },
       //banner数组
-      bannerList:[],
-      eduList:[],
-      teacherList:[]
+      bannerList: [],
+      eduList: [],
+      teacherList: []
     }
   },
   created() {
@@ -139,7 +142,7 @@ export default {
     //调用查询热门课程和名师的方法
     this.getHotCourseTeacher()
   },
-  methods:{
+  methods: {
     //查询热门课程和名师
     getHotCourseTeacher() {
       index.getIndexData()

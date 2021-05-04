@@ -108,9 +108,21 @@
                             </a>
                             <ol class="lh-menu-ol" style="display: block;">
                               <li class="lh-menu-second ml30" v-for="video in chapterVideo[index].children">
-                                <nuxt-link :to="'/player/' + video.videoSourceId" title>
+                                <nuxt-link v-if="buyCourse()" :to="'/player/' + video.videoSourceId" title>
+                                  <span class="fr">
+                                    <i class="free-icon vam mr10">立即观看</i>
+                                  </span>
+                                  <em class="lh-menu-i-2 icon16 mr5">&nbsp;</em>{{video.title}}
+                                </nuxt-link>
+                                <nuxt-link v-else-if="video.isFree === 1" :to="'/player/' + video.videoSourceId" title>
                                   <span class="fr">
                                     <i class="free-icon vam mr10">免费试听</i>
+                                  </span>
+                                  <em class="lh-menu-i-2 icon16 mr5">&nbsp;</em>{{video.title}}
+                                </nuxt-link>
+                                <nuxt-link :to="'/course/' + id"  v-else title>
+                                  <span class="fr">
+                                    <i class="free-icon vam mr10">请先购买</i>
                                   </span>
                                   <em class="lh-menu-i-2 icon16 mr5">&nbsp;</em>{{video.title}}
                                 </nuxt-link>
@@ -174,6 +186,7 @@ export default {
   asyncData({params, error}) {
     return course.getAllCourseInfo(params.id)
       .then(result => {
+        console.log(result)
         return {
           courseWebInfo: result.data.data.courses,
           chapterVideo: result.data.data.chapters
@@ -182,10 +195,12 @@ export default {
   },
   data() {
     return {
-      isBuyCourse: ''
+      isBuyCourse: '',
+      id: ''
     }
   },
   created() {
+    this.id = this.$route.params.id
     // 查询课程购买状态
     order.isBuyCourse(this.courseWebInfo.id)
       .then(result => {
