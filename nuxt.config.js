@@ -39,12 +39,28 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [],
 
-  // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
+  ],
+  axios: {
+    prefix: '/api',
+    proxy: true
+  },
+  proxy: {
+    '/api': {
+      target: `http://localhost:80`,
+      changeOrigin: true,
+      pathRewrite: {
+        '^/api': ''
+      }
+    }
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: [/^element-ui/],
+    vendor: ['axios']
   },
 
 }

@@ -87,7 +87,7 @@
         <el-form-item label="上传头像" label-width="120px">
           <el-upload
             class="avatar-uploader"
-            action="http://localhost/edu-oss/file"
+            action="/api/edu-oss/file"
             :show-file-list="false"
             :on-success="handleAvatarSuccess"
             accept="image/*"
