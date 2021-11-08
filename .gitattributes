@@ -1,0 +1,4 @@
+*.js linguist-language=Vue
+*.html linguist-language=Vue
+*.jpg linguist-language=Vue
+*.png linguist-language=Vue
